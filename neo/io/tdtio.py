@@ -237,7 +237,8 @@ class TdtIO(BaseIO):
 
         for blockname in os.listdir(self.dirname):
             seg = self.read_segment(blockname, lazy, cascade)
-            bl.segments.append(seg)
+            if isinstance(seg, Segment):
+                bl.segments.append(seg)
 
         bl.create_many_to_one_relationship()
         return bl
